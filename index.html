@@ -139,18 +139,14 @@
 
     preguntas.forEach(p => {
       const opciones = p.querySelectorAll('input');
-      let respondida = false;
       let acierto = false;
 
       opciones.forEach(o => {
         o.parentElement.style.color = 'white'; // reiniciar color visual
         o.parentElement.style.fontWeight = 'normal';
         
-        if (o.checked) {
-          respondida = true;
-          if (o.value === 'correcta') {
-            acierto = true;
-          }
+        if (o.checked && o.value === 'correcta') {
+          acierto = true;
         }
       });
 
@@ -167,34 +163,36 @@
     resultado.style.display = 'block';
     const total = preguntas.length;
 
- if (correctas === total) {
-  resultado.innerHTML = `
-    ✨ ¡Perfecto amor! 💖 Has acertado todo 💞 <br><br>
-    Eres increíble, Tatiana 💕 <br><br>
-    <button id="continuarBtn" style="
-      background:linear-gradient(90deg,#ff69b4,#ff1493);
-      border:none;
-      border-radius:20px;
-      padding:10px 20px;
-      color:white;
-      font-size:1rem;
-      cursor:pointer;
-      margin-top:10px;
-    ">Continuar al siguiente juego 💘</button>
-  `;
+    // --- Perfecto ---
+    if (correctas === total) {
+      resultado.innerHTML = `
+        ✨ ¡Perfecto amor! 💖 Has acertado todo 💞 <br><br>
+        Eres increíble, Tatiana 💕 <br><br>
+        <button id="continuarBtn" style="
+          background:linear-gradient(90deg,#ff69b4,#ff1493);
+          border:none;
+          border-radius:20px;
+          padding:10px 20px;
+          color:white;
+          font-size:1rem;
+          cursor:pointer;
+          margin-top:10px;
+        ">Continuar al siguiente juego 💘</button>
+      `;
 
-  document.getElementById('continuarBtn').addEventListener('click', () => {
-    window.location.href = 'laberinto.html';
-  });
-}
+      // Redirección al laberinto en GitHub Pages
+      document.getElementById('continuarBtn').addEventListener('click', () => {
+        window.location.href = 'https://MrT2k.github.io/regalo-para-tatiana/laberinto.html';
+      });
+    }
 
-  document.getElementById('continuarBtn').addEventListener('click', () => {
-    window.location.href = 'https://MrT2k.github.io/regalo-para-tatiana/laberinto.html';
-  });
-}
-    } else if (correctas >= total * 0.6) {
+    // --- Casi perfecto ---
+    else if (correctas >= total * 0.6) {
       resultado.innerHTML = `🌸 Lo hiciste muy bien, mi vida 💕 <br> Acertaste ${correctas} de ${total}. ¡Casi perfecto! 😘`;
-    } else {
+    }
+
+    // --- Falló un poco ---
+    else {
       resultado.innerHTML = `💔 Awww, amor... acertaste ${correctas} de ${total}. <br> ¡Pero igual te amo muchísimo! 💞`;
     }
 
@@ -206,8 +204,10 @@
   });
 </script>
 
+
 </body>
 </html>
+
 
 
 
