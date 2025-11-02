@@ -167,8 +167,31 @@
     resultado.style.display = 'block';
     const total = preguntas.length;
 
-    if (correctas === total) {
-      resultado.innerHTML = `✨ ¡Perfecto amor! 💖 Has acertado todo 💞 <br><br> Eres increíble, Tatiana 💕`;
+ if (correctas === total) {
+  resultado.innerHTML = `
+    ✨ ¡Perfecto amor! 💖 Has acertado todo 💞 <br><br>
+    Eres increíble, Tatiana 💕 <br><br>
+    <button id="continuarBtn" style="
+      background:linear-gradient(90deg,#ff69b4,#ff1493);
+      border:none;
+      border-radius:20px;
+      padding:10px 20px;
+      color:white;
+      font-size:1rem;
+      cursor:pointer;
+      margin-top:10px;
+    ">Continuar al siguiente juego 💘</button>
+  `;
+
+  document.getElementById('continuarBtn').addEventListener('click', () => {
+    window.location.href = 'laberinto.html';
+  });
+}
+
+  document.getElementById('continuarBtn').addEventListener('click', () => {
+    window.location.href = 'laberinto.html';
+  });
+}
     } else if (correctas >= total * 0.6) {
       resultado.innerHTML = `🌸 Lo hiciste muy bien, mi vida 💕 <br> Acertaste ${correctas} de ${total}. ¡Casi perfecto! 😘`;
     } else {
@@ -185,4 +208,5 @@
 
 </body>
 </html>
+
 
