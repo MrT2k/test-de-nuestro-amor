@@ -54,3 +54,154 @@
       background:linear-gradient(90deg,var(--pink),#ff1493);
       border:none;
       border-radius:20px;
+      color:white;
+      font-size:1rem;
+      cursor:pointer;
+      transition:transform .2s ease;
+    }
+    button:hover{
+      transform:scale(1.05);
+    }
+    #resultado{
+      margin-top:30px;
+      font-size:1.3rem;
+      color:#ffb6c1;
+      text-align:center;
+      display:none;
+      animation:fadeIn .9s ease both;
+    }
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(6px) scale(.98)}
+      to{opacity:1;transform:translateY(0) scale(1)}
+    }
+  </style>
+</head>
+<body>
+  <h1>💖 Cuestionario sobre Nosotros 💖</h1>
+
+  <form id="quiz">
+
+    <div class="pregunta">
+      <h3>1️⃣ ¿Qué te pregunté cuando te pedí ser mi novia?</h3>
+      <label><input type="radio" name="p1" value="correcta"> A: te pregunté si querías pasar una vida a mi lado, aguantando mis payasadas y estupideces</label>
+      <label><input type="radio" name="p1" value="incorrecta"> B: te pregunté simplemente si querías ser mi novia</label>
+      <label><input type="radio" name="p1" value="incorrecta"> C: te pregunté si deseabas ser mi futura esposa</label>
+    </div>
+
+    <div class="pregunta">
+      <h3>2️⃣ ¿Cuándo fue la primera vez que te dije "Te Amo"?</h3>
+      <label><input type="radio" name="p2" value="correcta"> A: el mismo 14/07 a las 6:42PM</label>
+      <label><input type="radio" name="p2" value="incorrecta"> B: el 16/07 a las 5:37PM</label>
+      <label><input type="radio" name="p2" value="incorrecta"> C: el 19/07 a las 8:45PM</label>
+    </div>
+
+    <div class="pregunta">
+      <h3>3️⃣ ¿Cuál es mi animal favorito?</h3>
+      <label><input type="radio" name="p3" value="incorrecta"> A: León</label>
+      <label><input type="radio" name="p3" value="correcta"> B: Armiño</label>
+      <label><input type="radio" name="p3" value="incorrecta"> C: Pingüino</label>
+    </div>
+
+    <div class="pregunta">
+      <h3>4️⃣ ¿Cuál es mi comida favorita?</h3>
+      <label><input type="checkbox" name="p4a" value="correcta"> A: Pizza</label>
+      <label><input type="checkbox" name="p4b" value="incorrecta"> B: Hamburguesa</label>
+      <label><input type="checkbox" name="p4c" value="correcta"> C: Tú 7w7</label>
+    </div>
+
+    <div class="pregunta">
+      <h3>5️⃣ ¿Qué es lo que más me gusta de ti?</h3>
+      <label><input type="checkbox" name="p5a" value="correcta"> A: Tu personalidad</label>
+      <label><input type="checkbox" name="p5b" value="correcta"> B: Tu terquedad</label>
+      <label><input type="checkbox" name="p5c" value="correcta"> C: Tu forma de ser</label>
+      <label><input type="checkbox" name="p5d" value="correcta"> D: Tu humor</label>
+      <label><input type="checkbox" name="p5e" value="correcta"> E: Todo lo anterior y más</label>
+    </div>
+
+    <div class="pregunta">
+      <h3>6️⃣ ¿Te gustaría ser mi esposa?</h3>
+      <label><input type="radio" name="p6" value="correcta"> A: Sí 💍</label>
+      <label><input type="radio" name="p6" value="correcta"> B: Sí (no te dejaré decir que no UwU)</label>
+    </div>
+
+    <button type="button" id="verResultado">Enviar 💞</button>
+  </form>
+
+  <div id="resultado"></div>
+
+ <script>
+  const boton = document.getElementById('verResultado');
+  const resultado = document.getElementById('resultado');
+
+  boton.addEventListener('click', () => {
+    const preguntas = document.querySelectorAll('.pregunta');
+    let correctas = 0;
+
+    preguntas.forEach(p => {
+      const opciones = p.querySelectorAll('input');
+      let acierto = false;
+
+      opciones.forEach(o => {
+        o.parentElement.style.color = 'white'; 
+        o.parentElement.style.fontWeight = 'normal';
+        
+        if (o.checked && o.value === 'correcta') {
+          acierto = true;
+        }
+      });
+
+      if (acierto) {
+        correctas++;
+        p.style.borderColor = '#4cffb8';
+        p.style.boxShadow = '0 0 15px rgba(76,255,184,0.4)';
+      } else {
+        p.style.borderColor = '#ff4c79';
+        p.style.boxShadow = '0 0 15px rgba(255,76,121,0.3)';
+      }
+    });
+
+    resultado.style.display = 'block';
+    const total = preguntas.length;
+
+    // --- Perfecto ---
+    if (correctas === total) {
+      resultado.innerHTML = `
+        ✨ ¡Perfecto amor! 💖 Has acertado todo 💞 <br><br>
+        Eres increíble, Tatiana 💕 <br><br>
+        <button id="continuarBtn" style="
+          background:linear-gradient(90deg,#ff69b4,#ff1493);
+          border:none;
+          border-radius:20px;
+          padding:10px 20px;
+          color:white;
+          font-size:1rem;
+          cursor:pointer;
+          margin-top:10px;
+        ">Ver la sorpresa final 💘</button>
+      `;
+
+      // 👉 Redirección al video en YouTube
+      document.getElementById('continuarBtn').addEventListener('click', () => {
+        window.location.href = 'https://youtu.be/8Ir_xhK2Nec';
+      });
+    }
+
+    // --- Casi perfecto ---
+    else if (correctas >= total * 0.6) {
+      resultado.innerHTML = `🌸 Lo hiciste muy bien, mi vida 💕 <br> Acertaste ${correctas} de ${total}. ¡Casi perfecto! 😘`;
+    }
+
+    // --- Falló un poco ---
+    else {
+      resultado.innerHTML = `💔 Awww, amor... acertaste ${correctas} de ${total}. <br> ¡Pero igual te amo muchísimo! 💞`;
+    }
+
+    boton.disabled = true;
+    boton.textContent = 'Resultados mostrados 💘';
+    boton.style.opacity = '0.7';
+    boton.style.cursor = 'default';
+  });
+</script>
+
+</body>
+</html>
