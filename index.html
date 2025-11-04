@@ -142,7 +142,7 @@
       let acierto = false;
 
       opciones.forEach(o => {
-        o.parentElement.style.color = 'white'; // reiniciar color visual
+        o.parentElement.style.color = 'white'; 
         o.parentElement.style.fontWeight = 'normal';
         
         if (o.checked && o.value === 'correcta') {
@@ -152,10 +152,10 @@
 
       if (acierto) {
         correctas++;
-        p.style.borderColor = '#4cffb8'; // borde verde
+        p.style.borderColor = '#4cffb8';
         p.style.boxShadow = '0 0 15px rgba(76,255,184,0.4)';
       } else {
-        p.style.borderColor = '#ff4c79'; // borde rojo
+        p.style.borderColor = '#ff4c79';
         p.style.boxShadow = '0 0 15px rgba(255,76,121,0.3)';
       }
     });
@@ -177,12 +177,12 @@
           font-size:1rem;
           cursor:pointer;
           margin-top:10px;
-        ">Continuar al siguiente juego 💘</button>
+        ">Ver la sorpresa final 💘</button>
       `;
 
-      // Redirección al laberinto en GitHub Pages
+      // 👉 Redirección al video en GitHub
       document.getElementById('continuarBtn').addEventListener('click', () => {
-        window.location.href = 'https://MrT2k.github.io/regalo-para-tatiana/';
+        window.location.href = 'https://github.com/MrT2k/tatiana-final';
       });
     }
 
@@ -196,7 +196,6 @@
       resultado.innerHTML = `💔 Awww, amor... acertaste ${correctas} de ${total}. <br> ¡Pero igual te amo muchísimo! 💞`;
     }
 
-    // Desactivar botón tras responder
     boton.disabled = true;
     boton.textContent = 'Resultados mostrados 💘';
     boton.style.opacity = '0.7';
@@ -204,11 +203,5 @@
   });
 </script>
 
-
 </body>
 </html>
-
-
-
-
-
